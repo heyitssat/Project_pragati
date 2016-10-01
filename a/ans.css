@@ -1,0 +1,158 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	color: #fff;
+	background-color: #c80400;
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
+	line-height: 15px;
+}
+
+a {
+	color: #fff;
+	background-color: inherit;
+	text-decoration: underline;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+
+img {
+	border: none;
+}
+
+p {
+	padding: 7px 0px 8px;
+	text-align: justify;
+}
+
+input {
+	border: 0px;
+	font-family: verdana, arial, sans-serif;
+	font-size: 11px;
+}
+
+.clearthis {
+	margin : 0px;
+	height : 1px;
+	clear : both;
+	float : none;
+	font-size: 1px;
+	line-height: 0px;
+	overflow : hidden;
+	visibility: hidden;
+}
+
+#body_wrapper {
+	margin-right: auto;
+	width: 1004px;
+}
+
+/* Left Column and Sidebar */
+
+#leftcolumn {
+	width: 329px;
+	color: #000;
+	background-color: inherit;
+	float: left;
+	text-align: left;
+	font-size: 9px;
+	margin-right:50px;
+}
+
+
+
+
+
+#rightcolumn {
+	width: 580px;
+	float: right;
+	text-align: left;
+}
+
+
+
+
+
+
+/* Center Column */
+
+#centercolumn {
+	width: 552px;
+	color: #333;
+	background-color: #fff;
+	float: left;
+	text-align: center;
+}
+
+#centercolumn_2 {
+	margin: 8px auto;
+	width: 542px;
+	text-align: left;
+}
+
+#centercolumn a {
+	color: #333;
+	background-color: inherit;
+}
+
+#centercolumn a:hover {
+	text-decoration: none;
+}
+
+
+/* Center Column News Box */
+
+.newsbox {
+	margin-bottom: 5px;
+	width: 542px;
+	background: url('images/newsbox_bg.jpg') repeat-y;
+}
+
+.newsbox_header {
+	padding: 19px 10px 5px;
+	background: url('images/newsbox_bg_top.jpg') no-repeat 0% 0%;
+	height: 22px;
+}
+
+.newsbox_header h2 {
+	padding-eft: 20px;
+	width: 330px;
+	float: left;
+	font-size: 10px;
+	font-weight: bold;
+}
+
+.newsbox_header strong {
+	float: right;
+}
+
+.newsbox_content {
+	padding: 0px 10px 20px;
+	background: url('images/newsbox_bg_bot.jpg') no-repeat 0% 100%;
+	line-height: 14px;
+}
+
+.newsbox_comments a {
+	text-decoration: none;
+}
+
+.newsbox_comments a:hover {
+	color: #959595;
+	background-color: inherit;
+}
+
+
+
+
+
+
+
+
+
+
