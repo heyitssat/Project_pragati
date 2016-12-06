@@ -2,6 +2,10 @@
 
 ﻿<?php
     session_start();
+if(!(isset($_SESSION[signed_in]) && isset($_SESSION['signed_in'])== true)){
+header('Location: http://localhost/a/reg/reg.php');
+}
+
  $servername = "localhost";
     $username = "root";
     $database = "questions";

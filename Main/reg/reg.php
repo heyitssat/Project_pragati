@@ -45,11 +45,6 @@ session_start();
                                             
                                             if ($conn->query($sql) === TRUE) {
                                                     echo "rlly";
-                                                } else {
-                                                    echo "Error : " . $conn->error;
-                                                }
-
-
 
                             $query = "SELECT  
                                                 user_id,
@@ -67,18 +62,30 @@ session_start();
                             $uid= $row['user_id'];
                             echo "dfd".$uid;
                                         //set the $_SESSION['signed_in'] variable to TRUE
-                                $_SESSION['signed_in'] = true;
                                  
                                 //we also put the user_id and user_name values in the $_SESSION, so we can use it at various pages
                                     $_SESSION['user_id'] = $row['user_id'];
                                     $_SESSION['user_name']  = $row['user_name'];
                                     $_SESSION['user_level'] = $row['user_level'];
+                                    $_SESSION['signed_in'] = true;
+
+
+
+
+                                                } else {
+
+                                                    echo "<br><br><br>Error : " . $conn->error;
+
+                                                }
+
+
+
                                      
                                                  
                                 if(!$result)
                                 {
                                     //something went wrong, display the error
-                                    echo '<br><br><br>Something went wrong while registering. Please try again later.';
+                                    echo '<center><br><br><br>Something went wrong while registering. Please try again later.</center>';
                                     //echo mysql_error(); //debugging purposes, uncomment when needed
                                 }
                                 else
@@ -282,10 +289,10 @@ else if(isset($_POST['submit']) && $_POST['submit']==='Sign Up')
         echo '<ul>';
         foreach($errors as $key => $value) /* walk through the array so all the errors get displayed */
         {
-            echo '<li>' . $value . '</li>'; /* this generates a nice error list */
+            echo '<center><h1 style="color:white;">' . $value . '</h1>'; /* this generates a nice error list */
         }
         echo '</ul>';
-        echo '<a href="http://localhost/a/reg/reg.php"> Try Again!</a>';
+        echo '<center><a href="http://localhost/a/reg/reg.php"> Try Again!</a></center>';
     }
     else
     {

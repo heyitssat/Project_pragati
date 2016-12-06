@@ -60,7 +60,7 @@ $rowcount=0;
 
       //NO OF ANSWERS
 
-          $sqls = "SELECT qans from `users` WHERE user_id=$uid";
+    /*      $sqls = "SELECT qans from `users` WHERE user_id=$uid";
             $results = $conn->query($sqls);
       $rows = $results->fetch_assoc(); 
       $id=$rows['qans'];
@@ -75,7 +75,7 @@ if(!(is_null($id))){
             }else{
                     $l=0;
             }
-
+*/
 
    ?>
    <section id="about">
@@ -84,8 +84,12 @@ if(!(is_null($id))){
 
          <div class="three columns">
 
-            <img class="profile-pic"  src="profilepic.jpg" alt="" />
-
+       <?php    
+        if(is_null($row['user_pic'])){
+           echo " <img class='profile-pic' src='http://localhost/a/useraccount/images/default.png'>";
+        }else{
+            echo " <img class='profile-pic' src='http://localhost/a/useraccount/$row[user_pic]'>";
+        }?>
          </div>
 
          <div class="nine columns main-col">
@@ -105,8 +109,8 @@ if(!(is_null($id))){
 			   
 			   <div class="columns contact-details">
 
-                  <h2>No Of Ques:<?php echo $rowcount;?></h2>
-                  <h2>No Of Ans:<?php echo $l;?></h2>
+                  <h2>No Of Ques: <?php echo $rowcount;?></h2>
+                  <h2><?php// echo "No Of Ans:" .$l."";?></h2>
                   
 
                </div>
@@ -152,7 +156,7 @@ if(!(is_null($id))){
    <section id="resume">
    <div class="row">
 <!--Question-->
-<div class="col s12 m12 l6">
+<div class="">
       <div class="row education">
 
          <div class="nine columns main-col">
@@ -172,7 +176,7 @@ if(!(is_null($id))){
             $no++;
             
 
-           echo "    <h3><a href ='answers.php?qid=$row[qid]'> $row[question] </a></h3>";   
+           echo "    <h3><a href ='http://localhost/a/answer/answer.php?qid=$row[qid]'> $row[question] </a></h3>";   
            ?>
 <p class="info">
               <div class="row">
@@ -205,22 +209,21 @@ if(!(is_null($id))){
 
 
 <?php }
-?>               </div>
-            </div> <!-- item end -->
 
-      </div> 
-</div>
-     
-
-<?php
 
       }else{
          echo "NO QUESTIONS TO SHOW";
       }
 ?>
 </div>
+            </div> <!-- item end -->
+
+      </div> 
+</div>
+</div>
 
 	  <!--Answers-->
+    <!--
 <div class="col s12 m12 l6" >	  
       <div class="row education" style="float:right">
 
@@ -230,8 +233,9 @@ if(!(is_null($id))){
 
 
 <div class="twelve columns">
-
+-->
 <?php
+/*
 // TABLE FOR ANSERES BY USER
       
 
@@ -257,13 +261,13 @@ echo $arra[0]."p".$arra[1]."k".arra[2];
                                             $row = $result->fetch_assoc();
                               
 
-                                                             echo "    <h3><a href ='answers.php?qid=$row[qid]'> $row[question] </a></h3>";   
+                                                             echo "    <h3><a style='color:black;' href ='answer.php?qid=$row[qid]'> $row[question] </a></h3>";   
                                                              ?>
                                                             <p class="info">
                                                                 <div class="row">
                                                                 <div class="col s6 m6 l6">&nbsp;&nbsp;No Of Votes:<?php echo $row['qvote'];?></div>
                                                                 <div class="col s6 m6 l6"><em class="date"><?php echo $row['reg_date'];?></em></div>
-                                                               <div class="col s4">POSTED BY:&nbsp;&nbsp;&nbsp;<font color="red" face="Copperplate Gothic Light" style="text-transform: uppercase;"><?php 
+                                                               <div class="col s9">&nbsp;&nbsp;Posted By: &nbsp;&nbsp;&nbsp;<font color="#b800e6" face="Copperplate Gothic Light" style="text-transform: uppercase;"><?php 
                                                                        if($row['anonymous'] =='0'){
                                                                        echo "$row[qname]";}
                                                                         else{ echo "anonymous"; }
@@ -300,7 +304,7 @@ echo $arra[0]."p".$arra[1]."k".arra[2];
                            while($rowl = $result->fetch_assoc() ){
                                                                   $no++;
 
-                                                                 echo "    <h6><a href ='answers.php?qid=$row[qid]'> $rowl[acmmnt] </a></h6>";   
+                                                                 echo "    <h6><a style='color:brown; href ='answer.php?qid=$row[qid]'> $rowl[acmmnt] </a></h6>";   
                                                                  ?>
                                                                         <p class="info">
                                                                     <div class="row">
@@ -309,12 +313,9 @@ echo $arra[0]."p".$arra[1]."k".arra[2];
                                                                     </div> 
                                                       </p>
                                                            
-                                                              </div>
+                                                              
 
-
-                                                                  </div> <!-- item end -->
-
-                            <?php } 
+                            <?php } ?><hr style="border-color:#604020;border-width:1px;"><br><br><?php
 
                             
                                    
@@ -323,8 +324,11 @@ echo $arra[0]."p".$arra[1]."k".arra[2];
 }else{
    echo "</div></div>NO ANSWERS TO SHOW";
 }
-?>
+*/?>
+ <!-- </div>
 
+
+                                                                  </div> 
       </div> 
 </div>
      
