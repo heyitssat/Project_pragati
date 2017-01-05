@@ -16,12 +16,10 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-$num=1;
-$query = "SELECT * from `master`";
-    $result = $conn->query($query);
-	 while($row = $result->fetch_assoc()) {
-        $num++;   
-	 }
+$qUery = "SELECT * from `master` ORDER BY qid DESC";
+$result = $conn->query($qUery);
+$crow = $result->fetch_assoc();
+$num = $crow['qid']+1;
 $tname ="question$num";
 // sql to create table
 $sql = "CREATE TABLE $tname (
@@ -47,13 +45,21 @@ $check=0;
 
 if(isset($_POST['cat_name']) && $_POST['cat_name']!=''){
         $cat_nam=test_input($_POST['cat_name']);
+        //write code to validate new category. cat_name
+
+
+
         $sql="INSERT INTO `categories`( `cat_name`) VALUES ('$cat_nam')";
    
         if ($conn->query($sql) === TRUE) {
   //  echo "New record created successfully";
     
         } else {
+
+
         echo "Error: " . $sql . "<br>" . $conn->error;
+        
+        
         }
     $sql ="SELECT * FROM `categories` WHERE cat_name='$cat_nam'";
      $result = $conn->query($sql);

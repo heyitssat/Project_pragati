@@ -281,6 +281,7 @@ if(isset($_GET['del'])){
          while($row = $result->fetch_assoc()){
             $no++;
             
+<<<<<<< HEAD
 
            echo "    <h3><a href ='http://localhost/a/answer/answer.php?qid=$row[qid]'> $row[question] </a></h3>";   
            ?>
@@ -347,12 +348,25 @@ if(isset($_GET['del'])){
               <div class="row">
               <div class="col s6 m6 l6">&nbsp;&nbsp;No Of Votes:<?php echo $row2['qvote'];?></div>
               <div class="col s6 m6 l6"><em class="date"><?php echo $row2['reg_date'];?></em></div>
+=======
+
+           echo "    <h3><a href ='http://localhost/a/answer/answer.php?qid=$row[qid]'> $row[question] </a></h3>";   
+           ?>
+<p class="info">
+              <div class="row">
+              <div class="col s6 m6 l6">&nbsp;&nbsp;No Of Votes:<?php echo $row['qvote'];?></div>
+              <div class="col s6 m6 l6"><em class="date"><?php echo $row['reg_date'];?></em></div>
+>>>>>>> bfca6adece6f9cafa65f3716b511d2e8e9ff1ff3
               
               </div> 
                <details>
                <summary>Tags</summary>
 <?php
+<<<<<<< HEAD
             $id=$row2['cat_id'];
+=======
+            $id=$row['cat_id'];
+>>>>>>> bfca6adece6f9cafa65f3716b511d2e8e9ff1ff3
             $arr=explode(",",$id);
             $la=count($arr);
             $i=0;
@@ -369,6 +383,15 @@ if(isset($_GET['del'])){
          ?>
                </details>
 </p>
+<<<<<<< HEAD
+=======
+
+
+
+
+<?php }
+
+>>>>>>> bfca6adece6f9cafa65f3716b511d2e8e9ff1ff3
 
 
 
@@ -488,6 +511,7 @@ echo $arra[0]."p".$arra[1]."k".arra[2];
 */
 ?><!--
   </div>
+<<<<<<< HEAD
 
 
                                                                   </div> 
@@ -499,6 +523,19 @@ echo $arra[0]."p".$arra[1]."k".arra[2];
             </div> -->                            <!-- item end -->
 
 
+=======
+
+
+                                                                  </div> 
+      </div> 
+</div>
+     
+
+ 
+            </div> -->                            <!-- item end -->
+
+
+>>>>>>> bfca6adece6f9cafa65f3716b511d2e8e9ff1ff3
          </div> 
 
       </div> 

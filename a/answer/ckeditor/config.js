@@ -4,18 +4,6 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-
-   config.filebrowserBrowseUrl = '../kcfinder/browse.php?opener=ckeditor&type=files';
-   config.filebrowserImageBrowseUrl = '../kcfinder/browse.php?opener=ckeditor&type=images';
-   config.filebrowserFlashBrowseUrl = '../kcfinder/browse.php?opener=ckeditor&type=flash';
-   config.filebrowserUploadUrl = '../kcfinder/upload.php?opener=ckeditor&type=files';
-   config.filebrowserImageUploadUrl = '../kcfinder/upload.php?opener=ckeditor&type=images';
-   config.filebrowserFlashUploadUrl = '../kcfinder/upload.php?opener=ckeditor&type=flash';
-	// Define changes to default configuration here. For example:
-	// config.language = 'fr';
-	// config.uiColor = '#AADC6E';
-};
-CKEDITOR.editorConfig = function( config ) {
 	config.toolbarGroups = [
 		{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
 		{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
@@ -34,5 +22,15 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'about', groups: [ 'about' ] }
 	];
 
-	config.removeButtons = 'Form,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,About,Maximize,ShowBlocks,Unlink,Link,Anchor,Language,Checkbox,Find,Replace,Redo,Undo,PasteFromWord,PasteText,Paste,Copy,Cut,Source,Save,NewPage,Preview,Print,Templates,Styles,Format,Font,FontSize,Indent,Outdent,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,SelectAll,Scayt';
+	config.removeButtons = 'Styles,Format,Font,FontSize,JustifyRight,JustifyCenter,JustifyLeft,JustifyBlock,About,Templates,Save,Source,NewPage,Preview,Print,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Replace,Find,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Outdent,Indent,Language,Link,Unlink,Anchor';
+
+ config.filebrowserBrowseUrl = '../kcfinder/browse.php?opener=ckeditor&type=files';
+   config.filebrowserImageBrowseUrl = '../kcfinder/browse.php?opener=ckeditor&type=images';
+   config.filebrowserFlashBrowseUrl = '../kcfinder/browse.php?opener=ckeditor&type=flash';
+   config.filebrowserUploadUrl = '../kcfinder/upload.php?opener=ckeditor&type=files';
+   config.filebrowserImageUploadUrl = '../kcfinder/upload.php?opener=ckeditor&type=images';
+   config.filebrowserFlashUploadUrl = '../kcfinder/upload.php?opener=ckeditor&type=flash';
+	// Define changes to default configuration here. For example:
+	// config.language = 'fr';
+	// config.uiColor = '#AADC6E';
 };
