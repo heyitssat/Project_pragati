@@ -241,7 +241,7 @@ echo "def";
 <div id="wrap">
 
 
-      <div class="fixed-action-btn horizontal" style="bottom: 45px; left: 24px;">
+      <div class="fixed-action-btn horizontal" style="top: 120px; right: 24px;">
     <a href="http://localhost/a/qpost/qpost.php" class="btn-floating btn-large red">
       <img src='discuss.png' alt='discuss' class='responsive-img'>
     </a>
@@ -319,41 +319,47 @@ $count=0;
 ?>  
 <div id="container" style="padding:5px;">
     <!-- page container -->
-<?php/*
-
-if(!empty($_POST["select_tag"])){  
-
-    $sqlss = "SELECT * FROM `categories`";
-    $resultss = mysqli_query($conn,$sqlss);
-    while($rowss = $resultss->fetch_assoc()){
-        foreach($_POST["select_tag"] as $topic_id)  
-        {  
-
-          if($rowss['cat_id']==$topic_id){
-            echo "<b>$rowss[cat_name]   </b> ";
-          }
-        } 
-    }              
-}
-  */
-?>        <!-- Start of News Box 1 -->
+    <!-- Start of News Box 1 -->
  <div class="page" id="home">
  <div class="row">
    <strong><i>
-   <div class="col s4">POSTED BY:&nbsp;&nbsp;&nbsp;<font color="red" face="Copperplate Gothic Light" style="text-transform: uppercase;"><?php 
+   <div class="col s8">
+   <div class="col s6">POSTED BY:&nbsp;&nbsp;&nbsp;<font color="red" face="Copperplate Gothic Light" style="text-transform: uppercase;"><?php 
    if($row['anonymous'] =='0'){
    echo "$row[qname]";}
     else{ echo "anonymous"; }
  ?></font></div>
-   <div class="col s4"></div>
+
    
-   <div class="col s4"><?php echo "$row[reg_date]";?></div>
-   </i></strong>
-  </div>
-  <div class="row" style="margin-left:10px">
+   <div class="col s6"><?php echo "$row[reg_date]";?></div>
+<div class="row" style="margin-left:10px">
   <h1 style="color:white;font-family:Cooper Black;font-size:200%;"><?php echo "$row[question]";?></h1>
   </div>
-  <div class="row" style="margin-left:10px">
+      </div>
+      <div class="col s1"> </div>
+      <div class="col s3">   
+
+<?php    
+      $saquery = "SELECT * FROM `users` WHERE user_id= $row[uid]";
+      $raquery = mysqli_query($conn,$saquery);
+
+      if($rowquery = $raquery -> fetch_assoc()){
+                      if(is_null($rowquery['user_pic'])){
+                        echo " <img class='responsive left no_border' alt='' style='margin-top:10px;width:100%;' src='http://localhost/a/useraccount/images/default.png'>";
+                      }else{
+                                if($row['anonymous'] =='0'){
+                                 echo " <img class='responsive left no_border' alt='' style='margin-top:10px;width:100%;' src='http://localhost/a/useraccount/$rowquery[user_pic]'>";
+                               }else{
+                                   echo " <img class='responsive left no_border' alt='' style='margin-top:10px;width:100%;' src='http://localhost/a/useraccount/images/default.png'>";
+                                 }
+                        }
+              }
+ ?>
+
+      </div>
+ 
+   </i></strong>
+  </div>  <div class="row" style="margin-left:10px">
   <div class='col s8 l4 m4'>
   <div class='col s8'>
  <?php 
@@ -368,17 +374,15 @@ if(isset($_SESSION['signed_in'])){
     $rowcount=mysqli_num_rows($Result);
          
     if(!$rowcount){
-         echo "<a href='questions.php?vote=1&qid=$pid'> <img src='like.png' alt='upvote' class='responsive-img' style='width:50%'></a>";
+         echo "<a href='questions.php?vote=1&qid=$pid'> <img src='like.png' alt='upvote' class='responsive-img' style='width:50%'></a>$row[qvote]";
 
      }else{
-         echo "<a href='questions.php?vote=0&qid=$pid'> <img src='unlike.png' alt='downvote' class='responsive-img' style='width:50%'></a>";
+         echo "<a href='questions.php?vote=0&qid=$pid'> <img src='unlike.png' alt='downvote' class='responsive-img' style='width:50%'></a>$row[qvote]";
      }
-}
-      ?>
-<?php echo "$row[qvote]";?>
+}else{ echo "Likse:$row[qvote]";} ?>
 </div>
  </div>
-   <div class="col s4">No Of Ans : <?php echo "$row[ans]";?></div>
+   <div class="col s4"><?php echo "No Of Ans :$row[ans]";?></div>
    <div class="col s12 m2 l2" style="float:left">
    <details>
             <summary>Tags</summary>             <?php
@@ -426,9 +430,20 @@ if(isset($_SESSION['signed_in'])){
 					</i></strong>
 					</div>
                      <div class="col s4 m4 l2">
-                     <img src="user.jpg" class="circle left no_border" alt="" style="margin-top:10px;width:100%;"><br>
-                     
-					 
+<?php    
+       // echo $row2[aname];
+
+        $squery = "SELECT * FROM `users` WHERE user_id= $row2[uid]";
+        $rquery = mysqli_query($conn,$squery);
+
+      if($rowquery = $rquery -> fetch_assoc()){
+        if(is_null($rowquery['user_pic'])){
+              echo " <img class='circle left no_border' alt='' style='margin-top:10px;width:100%;' src='http://localhost/a/useraccount/images/default.png'>";
+              }else{
+                echo " <img class='circle left no_border' alt='' style='margin-top:10px;width:100%;' src='http://localhost/a/useraccount/$rowquery[user_pic]'>";
+          }
+    }
+?>  					 
                      
                      </div>
                      <div class="col s8 m8 l10">
@@ -450,14 +465,15 @@ if(isset($_SESSION['signed_in'])){
                                  
                             if(!$rowcount){
 
-                             echo "<a href='questions.php?vote=1&qid=$pid&cid=$row2[id]'>";?> <img src='like.png' alt='downvote' class='responsive-img' style='width:50%'><?php echo "</a>";
+                             echo "<a href='questions.php?vote=1&qid=$pid&cid=$row2[id]'>";?> <img src='like.png' alt='downvote' class='responsive-img' style='width:50%'><?php echo "</a>$row2[aqvote]";
                              }else{
-                                echo "<a href='questions.php?vote=0&qid=$pid&cid=$row2[id]'>"; ?> <img src='unlike.png' alt='upvote' class='responsive-img' style='width:50%'><?php echo "</a>";
+                                echo "<a href='questions.php?vote=0&qid=$pid&cid=$row2[id]'>"; ?> <img src='unlike.png' alt='upvote' class='responsive-img' style='width:50%'><?php echo "</a>$row2[aqvote]";
 
                              }  
+                        }else{
+                          echo "Likes:$row2[aqvote] ";
                         }
                     ?>
-					<?php echo "$row2[aqvote]";?>
                     </div>
 					</div>
 
@@ -491,19 +507,44 @@ if(isset($_SESSION['signed_in'])){
  <div class="page" id="home">
  <div class="row">
    <strong><i>
-   <div class="col s4">POSTED BY:&nbsp;&nbsp;&nbsp;<font color="red" face="Copperplate Gothic Light" style="text-transform: uppercase;"><?php 
+   <div class="col s8">
+   <div class="col s6">POSTED BY:&nbsp;&nbsp;&nbsp;<font color="red" face="Copperplate Gothic Light" style="text-transform: uppercase;"><?php 
    if($row['anonymous'] =='0'){
    echo "$row[qname]";}
     else{ echo "anonymous"; }
  ?></font></div>
-   <div class="col s4"></div>
+
    
-   <div class="col s4"><?php echo "$row[reg_date]";?></div>
-   </i></strong>
-  </div>
-  <div class="row" style="margin-left:10px">
+   <div class="col s6"><?php echo "$row[reg_date]";?></div>
+<div class="row" style="margin-left:10px">
   <h1 style="color:white;font-family:Cooper Black;font-size:200%;"><?php echo "$row[question]";?></h1>
   </div>
+      </div>
+      <div class="col s1"> </div>
+      <div class="col s3">   
+
+<?php    
+      $saquery = "SELECT * FROM `users` WHERE user_id= $row[uid]";
+      $raquery = mysqli_query($conn,$saquery);
+
+      if($rowquery = $raquery -> fetch_assoc()){
+                      if(is_null($rowquery['user_pic'])){
+                        echo " <img class='responsive left no_border' alt='' style='margin-top:10px;width:100%;' src='http://localhost/a/useraccount/images/default.png'>";
+                      }else{
+                                if($row['anonymous'] =='0'){
+                                 echo " <img class='responsive left no_border' alt='' style='margin-top:10px;width:100%;' src='http://localhost/a/useraccount/$rowquery[user_pic]'>";
+                               }else{
+                                   echo " <img class='responsive left no_border' alt='' style='margin-top:10px;width:100%;' src='http://localhost/a/useraccount/images/default.png'>";
+                                 }
+                        }
+              }
+ ?>
+
+      </div>
+ 
+   </i></strong>
+  </div>
+  
   <div class="row" style="margin-left:10px">
   <div class='col s8 l4 m4'>
   <div class='col s8'>
@@ -519,17 +560,16 @@ if(isset($_SESSION['signed_in'])){
     $rowcount=mysqli_num_rows($Result);
          
     if(!$rowcount){
-         echo "<a href='questions.php?vote=1&qid=$pid'> <img src='like.png' alt='upvote' class='responsive-img' style='width:50%'></a>";
+         echo "<a href='questions.php?vote=1&qid=$pid'> <img src='like.png' alt='upvote' class='responsive-img' style='width:50%'></a>$row[qvote]";
 
      }else{
-         echo "<a href='questions.php?vote=0&qid=$pid'> <img src='unlike.png' alt='downvote' class='responsive-img' style='width:50%'></a>";
+         echo "<a href='questions.php?vote=0&qid=$pid'> <img src='unlike.png' alt='downvote' class='responsive-img' style='width:50%'></a>$row[qvote]";
      }
-}
-      ?>
-<?php echo "$row[qvote]";?>
+
+}else{ echo "Likse:$row[qvote]";} ?>
 </div>
  </div>
-   <div class="col s4">No Of Ans : <?php echo "$row[ans]";?></div>
+   <div class="col s4"><?php echo "No Of Ans : $row[ans]";?></div>
    <div class="col s12 m2 l2" style="float:left">
    <details>
             <summary>Tags</summary>             <?php
@@ -577,10 +617,21 @@ if(isset($_SESSION['signed_in'])){
           </i></strong>
           </div>
                      <div class="col s4 m4 l2">
-                     <img src="user.jpg" class="circle left no_border" alt="" style="margin-top:10px;width:100%;"><br>
-                     
-           
-                     
+<?php    
+       // echo $row2[aname];
+
+        $squery = "SELECT * FROM `users` WHERE user_id= $row2[uid]";
+        $rquery = mysqli_query($conn,$squery);
+    if($rowquery = $rquery -> fetch_assoc()){
+        if(is_null($rowquery['user_pic'])){
+              echo " <img class='circle left no_border' alt='' style='margin-top:10px;width:100%;' src='http://localhost/a/useraccount/images/default.png'>";
+              }else{
+                echo " <img class='circle left no_border' alt='' style='margin-top:10px;width:100%;' src='http://localhost/a/useraccount/$rowquery[user_pic]'>";
+          }
+    }
+?>   
+   
+     
                      </div>
                      <div class="col s8 m8 l10">
                      <div class="row">
@@ -601,14 +652,16 @@ if(isset($_SESSION['signed_in'])){
                                  
                             if(!$rowcount){
 
-                             echo "<a href='questions.php?vote=1&qid=$pid&cid=$row2[id]'>";?> <img src='like.png' alt='downvote' class='responsive-img' style='width:50%'><?php echo "</a>";
+                             echo "<a href='questions.php?vote=1&qid=$pid&cid=$row2[id]'>";?> <img src='like.png' alt='downvote' class='responsive-img' style='width:50%'><?php echo "</a>$row2[aqvote]";
                              }else{
-                                echo "<a href='questions.php?vote=0&qid=$pid&cid=$row2[id]'>"; ?> <img src='unlike.png' alt='upvote' class='responsive-img' style='width:50%'><?php echo "</a>";
+                                echo "<a href='questions.php?vote=0&qid=$pid&cid=$row2[id]'>"; ?> <img src='unlike.png' alt='upvote' class='responsive-img' style='width:50%'><?php echo "</a>$row2[aqvote]";
 
                              }  
+                        }else{
+
+                          echo "Likes:$row2[aqvote] ";
                         }
                     ?>
-          <?php echo "$row2[aqvote]";?>
                     </div>
           </div>
 

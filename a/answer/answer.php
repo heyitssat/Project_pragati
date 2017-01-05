@@ -197,7 +197,7 @@ if(isset($_GET['vote'])){
 
 if(isset($_GET['x'])){   
     if(!isset($_SESSION['signed_in'])) {
-    echo "<p class='error_message'>Oops!You are not signed in!</p> <a href='http://localhost/a/reg/reg.'> Click here </a>to sign in.<br>";
+    echo "<p class='error_message'>Oops!You are not signed in!</p> <a href='http://localhost/a/reg/reg.php'> Click here </a>to sign in.<br>";
   }
   else {
     
@@ -209,59 +209,57 @@ if(isset($_GET['x'])){
             $sid=$_GET['t'];
             #echo $pid;
             #echo $sid;
-                $sql= "SELECT uid FROM question$pid WHERE id='$sid'";
+            $sql= "SELECT uid FROM question$pid WHERE id='$sid'";
               $result = mysqli_query($conn,$sql);
               $row = $result->fetch_assoc();
                 $id=$row['uid'];
+
+
+
                 $nowid= $_SESSION['user_id'];
             if($id==$nowid || ($_SESSION['user_level']==1)){
-                $sql = "DELETE FROM question$pid WHERE id='$sid'";
-                if($conn->query($sql)){
+                                        $sql = "DELETE FROM question$pid WHERE id='$sid'";
+                         if($conn->query($sql)){
 
-#echo "comment deleted ";
-        }
-  $sql= "SELECT ans FROM master WHERE qid=$pid";
-    $result = mysqli_query($conn,$sql);
-    $row = $result->fetch_assoc();
-        $asr=$row['ans'];
-        echo $asr;
-        echo "dkjdkj";
-    $asr--;
-    echo $asr;
-    echo $pid;
-$sql="UPDATE `master` SET `ans`= $asr WHERE qid=$pid";
-                     
-                if($conn->query($sql)){
-echo "  updated ";
-        }
-           
+                        #echo "comment deleted ";
+                                }
+
+                          $sql= "SELECT ans FROM master WHERE qid=$pid";
+                            $result = mysqli_query($conn,$sql);
+                            $row = $result->fetch_assoc();
+                                $asr=$row['ans'];
+                                echo $asr;
+                                echo "dkjdkj";
+                            $asr--;
+                            echo $asr;
+                            echo $pid;
+                        $sql="UPDATE `master` SET `ans`= $asr WHERE qid=$pid";
+                                             
+                                        if($conn->query($sql)){
+                        echo "  updated ";
+                                }
+                                   
 
 
-                $rown=0;
-                $query = "SELECT * from `question$pid`";
-                $result = $conn->query($query);
-            while($row = $result->fetch_assoc()) {
-                $rown++;   
-            }                  
-                $count=$sid;                                    //updating the values which come after $pid to -1.
-                while($count<=$rown){
-                $z=$count+1;
-                $sql="UPDATE `question$pid` SET `id`=$count WHERE id=$z";
-                
-                if($conn->query($sql)){
-#echo " row $count  updated ";
-        }
-                
-                $count++;
-                }
-               $y=$rown +1;
-                $sql="ALTER TABLE `question$pid` AUTO_INCREMENT = $y";
-        
-        if($conn->query($sql)){
-#echo "auto increment updated";
-        }
-             
+   
+  $qUery = "SELECT * from `master` ORDER BY qid DESC";
+  $result = $conn->query($qUery);
+   $crow = $result->fetch_assoc();
+    $y= $crow['qid'];
+    $y++;
+                                        $sql="ALTER TABLE `question$pid` AUTO_INCREMENT = $y";
+                                
+                                if($conn->query($sql)){
+                        #echo "auto increment updated";
+                                }
+
+
+
+
+       //   header('Location: http://localhost/answer/answer.php?qid=$pid');                           
+          header('Location: http://localhost/a/question/questions.php');                           
    }else{ echo" <p class='error_message' >You don't have permission to delete it!</p>";}             
+       
             }else if($change=='1'){                                     // to delete the question
         
               $sql= "SELECT uid FROM master WHERE qid='$pid'";
@@ -276,22 +274,18 @@ echo "  updated ";
                 #echo "question deleted ";
                 }
 
-            $rown=0;
+            $rown=0;    
             $query = "SELECT * from `master`";
             $result = $conn->query($query);
      while($row = $result->fetch_assoc()) {
             $rown++;   
    }                
-                $count=$pid;                                    //updating the values which come after $pid to -1.
-                while($count<=$rown){        //= is applied as the rown is the no. of rows after deletion.
-                $z=$count +1;
-                $sql="UPDATE `master` SET `qid`=$count WHERE qid= $z";
-                if($conn->query($sql)){
-                    #echo " row $count  updated ";
-                    }
-                $count++;
-                }
-                $y=$rown +1;
+                  
+  $qUery = "SELECT * from `master` ORDER BY qid DESC";
+  $result = $conn->query($qUery);
+   $crow = $result->fetch_assoc();
+    $y= $crow['qid'];
+    $y++;
                 $sql="ALTER TABLE `master` AUTO_INCREMENT = $y";
 if($conn->query($sql)){
 #echo "auto increment updated";
@@ -300,16 +294,8 @@ if($conn->query($sql)){
 if($conn->query($pql)){
 #echo "table question$pid dropped";
 }
-                $count=$pid;                                    //updating the values which come after $pid to -1.
-            while($count<=$rown){       // = is applied as the rown is the no. of rows after deletion.
-                $y=$count+1;
-                $pql="RENAME TABLE `question$y` TO `question$count`";
-            if($conn->query($pql)){
-                    #echo "table question$y renamed";
-                    }
 
-                $count++;
-                }
+
                 header('Location: http://localhost/a/question/questions.php');
             }else{
                 echo "<p class='error_message'>You don't have right to delete this content.</p>";
@@ -366,7 +352,7 @@ $sap=$_SESSION['user_id'];
 
 
 if(!(is_null($row['qans'])) ){    
-        if (strpos($row['qans'], $pid) == false){
+        if (strpos($row['qans'], $pid) === false){
                     echo "adg";
                         $qans=$qans.",".$pid;
                 echo $qans;
@@ -431,30 +417,30 @@ date_default_timezone_set("Asia/Kolkata");
 <div id="wrap">
 
 
-      <div class="fixed-action-btn horizontal" style="bottom: 45px; left: 24px;">
+      <div class="fixed-action-btn horizontal" style="top: 120px; right: 24px;">
     <a href="http://localhost/a/qpost/qpost.php" class="btn-floating btn-large red">
       <img src='discuss.png' alt='discuss' class='responsive-img'>
     </a>
   </div>
 
-  <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+  <div class="fixed-action-btn horizontal" style="bottom: 10px; right: 24px;">
     <a href="http://localhost/a/useraccount/useraccount.php" class="btn-floating btn-large red">
       <img src='account.png' alt='my account' class='responsive-img'>
     </a>
   </div>
   <!-- wrapper -->
   <div id="sidebar" style="overflow:auto">
-  <form method='post' action='' id='a'>
-	<center>
-			<div style="margin:5px;"><textarea name='cmmnt' class='ckeditor' required style='width:100%' rows="2"></textarea></div>
-		
-	<br>
-			<div style="margin:10px;"><button class="btn waves-effect waves-light" type="submit" name="action" style="width:100%">
+  <form method='post' action="" id='a'>
+    <center>
+            <div style="margin:5px;"><textarea name='cmmnt' class='ckeditor' required style='width:100%' rows="2"></textarea></div>
+        
+    <br>
+            <div style="margin:10px;"><button class="btn waves-effect waves-light" type="submit" name="action" style="width:100%">
             SUBMIT
-			</button></div>
+            </button></div>
 
-	</center>
-	</form>
+    </center>
+    </form>
 
 <?php 
 // fetch the question
@@ -470,18 +456,18 @@ date_default_timezone_set("Asia/Kolkata");
  <div class="page" id="home">
  
  <div class="row" style="margin-left:10px">
-	 <strong><i>
-	 <div class="col s4">POSTED BY:<?php 
+     <strong><i>
+     <div class="col s4">POSTED BY:<?php 
    if($row['anonymous'] =='0'){
    echo "$row[qname]";}
     else{ echo "anonymous"; }
  ?></div>
-	 <div class="col s2"></div>
-	 
-	 <div class="col s4"><?php echo "$row[reg_date]";?></div><div class="col s2"><a class="waves-effect"><i class="material-icons left">  <?php  if(isset($_SESSION['user_name']) && $_SESSION['user_name']==$row['qname']){
+     <div class="col s2"></div>
+     
+     <div class="col s4"><?php echo "$row[reg_date]";?></div><div class="col s2"><a class="waves-effect"><i class="material-icons left">  <?php  if(isset($_SESSION['user_name']) && $_SESSION['user_name']==$row['qname']){
        
                     echo "<a role='button' class='btn btn-succes'href='http://localhost/a/check.php?s=2&qid=$pid&x=1' >Delete</a>";}?></i></a></div>
-	 </i></strong>
+     </i></strong>
   </div>
   <div class="row" style="margin-left:10px">
   <h1 style="font-family:Cooper Black;font-size:200%;"><?php echo "$row[question]";?></h1>
@@ -518,8 +504,8 @@ if(isset($_SESSION['signed_in'])){
 
 
   </div><div class="col s4" style="bottom: 0px;"><?php echo "$row[qvote]";?></div></div>
-	 <div class="col s4">No Of Ans:&nbsp;&nbsp;&nbsp;<?php echo "$row[ans]";?></div>
-	 <div class="col s12 m2 l2" style="float:left"><details>
+     <div class="col s4"><?php echo "No Of Ans:&nbsp;&nbsp;&nbsp;$row[ans]";?></div>
+     <div class="col s12 m2 l2" style="float:left"><details>
             <summary>Tags</summary>
              <?php
                                                     // view the tags
@@ -558,7 +544,21 @@ while($row2 = $result2->fetch_assoc()){
  <div class="row">
    <div class="col s4" style="float:right"><?php echo "$row2[reg_date]";?></div>
  <div class="col s4 m4 l3">
- <img src="user.jpg" class="circle left no_border" alt="" style="margin-top:10px;width:100%;">
+
+
+<?php    
+      $saquery = "SELECT * FROM `users` WHERE user_id= $row2[uid]";
+      $raquery = mysqli_query($conn,$saquery);
+
+      if($rowquery = $raquery -> fetch_assoc()){
+                      if(is_null($rowquery['user_pic'])){
+                        echo " <img class='circle left no_border' alt='' style='margin-top:10px;width:100%;' src='http://localhost/a/useraccount/images/default.png'>";
+                      }else{
+                                
+                                 echo " <img class='circle left no_border' alt='' style='margin-top:10px;width:100%;' src='http://localhost/a/useraccount/$rowquery[user_pic]'>";
+                        }
+              }
+ ?>
  
  </div>
  <div class="col s8 m8 l9">
@@ -582,7 +582,7 @@ while($row2 = $result2->fetch_assoc()){
 
          echo "<a href='http://localhost/a/answer/answer.php?vote=1&qid=$pid&cid=$row2[id]'><div class='col s4 m4 l2' style='float:right'><img src='like.png' alt='upvote' class='responsive-img' style='width:80%'>
 </div>
-></a>";
+</a>";
          }else{
             echo "<a href='http://localhost/a/answer/answer.php?vote=0&qid=$pid&cid=$row2[id]'><div class='col s4 m4 l2' style='float:right'><img src='unlike.png' alt='downvote' class='responsive-img' style='width:80%'>
 </div>
