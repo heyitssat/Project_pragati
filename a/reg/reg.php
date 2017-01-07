@@ -90,7 +90,7 @@ session_start();
                                 }
                                 else
                                 {
-                                    header("Location:check.php?s=4&t=$uid");
+                                    header("Location: http://localhost/a/check.php?s=4&t=$uid");
                                 }
                  }else{
                                // echo 'OTP entered does not match<br>';
@@ -215,7 +215,7 @@ if(isset($_GET['error']) && $_GET['error']==1){
 
                                 <div class="form-group">
                                     <?php
-                                             echo '<p class="error_message" style="font-family:verdana;" onclick="newDoc()" id="but" value="1" >Forgot Password?</p>
+                                             echo '<p class="error_message"  style="cursor:pointer;font-family:verdana;" onclick="newDoc()" id="but" value="1" >Forgot Password?</p>
 
                                               <div style="text-align:center;"> <p id ="error1"></p></div>';
 

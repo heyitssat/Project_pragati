@@ -45,6 +45,7 @@ $check=0;
 
 if(isset($_POST['cat_name']) && $_POST['cat_name']!=''){
         $cat_nam=test_input($_POST['cat_name']);
+        $cat_nam=mysqli_real_escape_string($conn,$cat_nam); 
         //write code to validate new category. cat_name
 
 
@@ -120,7 +121,7 @@ $conn->close();
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
-  $data = htmlspecialchars($data);
+  $data = htmlspecialchars($datsa);
   return $data;
 }
 

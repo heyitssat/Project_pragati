@@ -124,6 +124,9 @@ include'header2.php';
                         <!-- // End Right Side // -->
                     </div>
                    
+    <div class="Center">                
+        <p style="text-align: center;color: black">COPYRIGHT © 2084 COMPANY NAME. DESIGN:TEMPLATEMO</p>
+    </div>
                     <!-- // End Footer // -->
                 </div>
                 <!-- // End Get Section // -->
@@ -136,13 +139,6 @@ include'header2.php';
 	<!-- // End Layout Frame // -->
 </div>
 <!-- // End Design Holder // -->
-<div id="loader-wrapper">
-<div id="loader"></div>
-
-    <div class="loader-section section-left"></div>
-    <div class="loader-section section-right"></div>
-
-</div>
 
 <!-- <<Attched Javascripts>> -->
 

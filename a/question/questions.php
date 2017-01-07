@@ -288,7 +288,7 @@ echo '
 </font>
 <center>
 <li class="collection-item" style="margin:10%;text-align:center;">
-      <input type="submit" name="post" class="btn btnAbout btn-clear border-color color-primary btn-lg linear  " style="width:100%" />
+      <input type="submit" value="SUBMIT" name="post" class="btn btnAbout btn-clear border-color color-primary btn-lg linear  " style="width:100%" />
     </li>
   </center>
 </form>';
@@ -379,14 +379,10 @@ if(isset($_SESSION['signed_in'])){
      }else{
          echo "<a href='questions.php?vote=0&qid=$pid'> <img src='unlike.png' alt='downvote' class='responsive-img' style='width:50%'></a>$row[qvote]";
      }
-}else{ echo "Likse:$row[qvote]";} ?>
+}else{ echo "Likes:$row[qvote]";} ?>
 </div>
  </div>
-<<<<<<< HEAD
    <div class="col s4"><?php echo "No Of Ans :$row[ans]";?></div>
-=======
-   <div class="col s4"><?php //echo "No Of Ans :$row[ans]";?></div>
->>>>>>> bfca6adece6f9cafa65f3716b511d2e8e9ff1ff3
    <div class="col s12 m2 l2" style="float:left">
    <details>
             <summary>Tags</summary>             <?php
@@ -570,14 +566,10 @@ if(isset($_SESSION['signed_in'])){
          echo "<a href='questions.php?vote=0&qid=$pid'> <img src='unlike.png' alt='downvote' class='responsive-img' style='width:50%'></a>$row[qvote]";
      }
 
-}else{ echo "Likse:$row[qvote]";} ?>
+}else{ echo "Likes:$row[qvote]";} ?>
 </div>
  </div>
-<<<<<<< HEAD
    <div class="col s4"><?php echo "No Of Ans : $row[ans]";?></div>
-=======
-   <div class="col s4"><?php //echo "No Of Ans : $row[ans]";?></div>
->>>>>>> bfca6adece6f9cafa65f3716b511d2e8e9ff1ff3
    <div class="col s12 m2 l2" style="float:left">
    <details>
             <summary>Tags</summary>             <?php

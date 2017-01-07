@@ -57,7 +57,7 @@
                                                                     <?php
                                         session_start();
                                     if(!isset($_SESSION['signed_in'])){
-                                    echo"<a href='http://localhost/a/reg/reg.php'>Sign in</a><span class='menu-item-bg'></span>";
+                                    echo"<a href='http://localhost/a/reg/reg.php'>Sign in/Register</a><span class='menu-item-bg'></span>";
                                     }else{
                                     echo"<a href='http://localhost/a/reg/signout.php'>Sign out</a><span class='menu-item-bg'></span> ";
                                     }
