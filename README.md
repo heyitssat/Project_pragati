@@ -1,4 +1,4 @@
-#Project_pragati
+#Project Web_Forum
 
 >This is the Repository of summer'16 project completed under **Programming Club IITK** by **Satyam Sahu** and **Kumar Aryan**.
 
